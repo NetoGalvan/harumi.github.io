@@ -27,7 +27,7 @@ $(document).ready(function(){
             }, 700, function(){
                 window.location.hash = hash;
             });
-        } 
+        }
     });
 });
 
@@ -60,7 +60,7 @@ $(window).on("load", function() {
 function initMap() {
 // Styles a map in night mode.
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40.674, lng: -73.945},
+        center: {lat: 19.420350546564478, lng: -99.05141956700285},
         zoom: 12,
         scrollwheel:  false,
         navigationControl: false,
