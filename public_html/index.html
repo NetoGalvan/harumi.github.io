@@ -32,9 +32,7 @@
         </div>
     </header>
 
-    <audio autoplay loop muted>
-        <source src="assets/imgs/one.mp3" type="audio/mpeg">
-    </audio>
+    <div id="audioContainer"></div>
 
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" data-spy="affix" data-offset-top="510">
         <div class="container">
@@ -784,17 +782,44 @@
         setInterval(mostrarCuentaRegresiva, 1000);
     </script>
 
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    var audio = document.querySelector('audio');
+        const audioContainer = document.getElementById('audioContainer');
 
-    // Esperar un poco antes de iniciar la reproducción
-    setTimeout(function() {
-        audio.play();
-    }, 100);
-});
+        // Función para crear y configurar el elemento audio
+        function createAudioElement() {
+            const audio = document.createElement('audio');
+            audio.src = 'assets/imgs/one.mp3';
+            audio.type = 'audio/mpeg';
+            audio.loop = true;
+            audio.muted = true; // Inicialmente silencioso
+            audio.autoplay = true; // Intenta reproducirse automáticamente
 
+            // Event listener para detectar cuando el audio termine de cargar
+            audio.addEventListener('canplaythrough', function() {
+                console.log('Audio listo para reproducir');
+
+                // Intenta reproducir después de un pequeño delay
+                setTimeout(() => {
+                    audio.play();
+                }, 500); // Delay de 500ms
+            });
+
+            return audio;
+        }
+
+        // Crea el elemento audio y lo añade al DOM
+        const audio = createAudioElement();
+        audioContainer.appendChild(audio);
+
+        // Manejo de eventos para controlar la reproducción
+        audio.addEventListener('ended', function() {
+            console.log('Audio terminó de reproducir');
+            this.currentTime = 0; // Resetear el tiempo actual
+            this.play(); // Reproducir nuevamente
+        });
     </script>
+
 </body>
 </html>
 
